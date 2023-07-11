@@ -1,13 +1,39 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import RestaurantIcon from "@mui/icons-material/Restaurant";
+import HomeIcon from "@mui/icons-material/Home";
+import PostAddIcon from "@mui/icons-material/PostAdd";
+import LoginIcon from "@mui/icons-material/Login";
+import LogoutIcon from '@mui/icons-material/Logout';
+import PermIdentityIcon from "@mui/icons-material/PermIdentity";
+
 import "./Navbar.css";
 
-const Navbar = () => {
+const Navbar = ({ isAuth }) => {
   return (
     <nav>
-      <Link to="/">Home</Link>
-      <Link to="/createpost">Post</Link>
-      <Link to="/login">Login</Link>
+      <RestaurantIcon className="navbar--icon" />
+      <div className="navbar--links">
+        <Link to="/">
+          <HomeIcon />
+          Home
+        </Link>
+        <Link to="/createpost">
+          <PostAddIcon />
+          Post
+        </Link>
+        {!isAuth ? (
+          <Link to="/login">
+            <LoginIcon />
+            Login
+          </Link>
+        ) : (
+          <Link to="/logout">
+            <LogoutIcon />
+            Logout
+          </Link>
+        )}
+      </div>
     </nav>
   );
 };

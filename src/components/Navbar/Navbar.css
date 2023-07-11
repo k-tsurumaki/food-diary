@@ -1,18 +1,48 @@
 nav {
   display: flex;
-  justify-content: center;
+  justify-content: space-between; 
   align-items: center;
-  height: 50px;
-  background-color: var(--app-color);
+  height: 70px;
+  background-color: var(--app-background);
+  flex-wrap: wrap;
+}
+
+.navbar--icon {
+  margin-right: auto;
+  color: var(--app-color);
+  font-size: 40px !important;
+  flex-basis: 100px;
+}
+
+.navbar--links {
+  display: flex;
+  justify-content: flex-end;
+  width: 20%;
   gap: 45px;
+  margin: 20px;
 }
 
-nav a {
-    text-decoration: none;
-    color: white;
-    transition: all 0.2s;
+.navbar--links a {
+  display: flex;
+  flex-basis: 30%;
+  align-items: center;
+  text-decoration: none;
+  color: white;
+  transition: all 0.2s;
+  font-size: 20px;
 }
 
-nav a:hover {
-    color: gray;
+.navbar--links a:hover {
+  color: gray;
+}
+
+.navbar--links a .MuiSvgIcon-root {
+  padding-right: 7px;
+}
+
+/* メディアクエリ */
+@media screen and (max-width: 600px) {
+  .navbar--links a {
+      flex-basis: 100%;  /* 変更 */
+  }
 }
