@@ -1,38 +1,44 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Timeline.css";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import ImageListItemBar from "@mui/material/ImageListItemBar";
 import IconButton from "@mui/material/IconButton";
-import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
-
-// const Timeline = () => {
-//   return <div className="timeline">Timeline</div>;
-// };
-
-// export default Timeline;
+import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../../firebase";
 
 export default function Timeline() {
+  const [postList, setPostList] = useState([]);
+
+  useEffect(() => {
+    const getPosts = async () => {
+      const data = await getDocs(collection(db, "posts"));
+      setPostList(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    };
+    getPosts();
+  }, []);
+
   return (
     <ImageList sx={{ width: 800, height: 1100 }} className="imageList">
       <ImageListItem key="Subheader" cols={2} className="imageListItem">
         <h2>Timeline</h2>
       </ImageListItem>
-      {itemData.map((item) => (
-        <ImageListItem key={item.img}>
+      {postList.map((post) => (
+        <ImageListItem key={post.id}>
           <img
-            src={`${item.img}?w=248&fit=crop&auto=format`}
-            srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
-            alt={item.title}
+            src="https://images.unsplash.com/photo-1551963831-b3b1ca40c98e?w=248&fit=crop&auto=format"
+            srcSet="https://images.unsplash.com/photo-1551963831-b3b1ca40c98e?w=248&fit=crop&auto=format&dpr=2 2x"
+            alt={post.shopName}
             loading="lazy"
           />
           <ImageListItemBar
-            title={item.title}
-            subtitle={item.author}
+            title={post.shopName}
+            subtitle={post.userName}
             actionIcon={
               <IconButton
                 sx={{ color: "rgba(255, 255, 255, 0.54)" }}
-                aria-label={`info about ${item.title}`}
+                aria-label={`info about ${post.shopName}`}
               >
                 <ArrowCircleRightIcon />
               </IconButton>
@@ -42,6 +48,38 @@ export default function Timeline() {
       ))}
     </ImageList>
   );
+
+  // return (
+  //   <ImageList sx={{ width: 800, height: 1100 }} className="imageList">
+  //     <ImageListItem key="Subheader" cols={2} className="imageListItem">
+  //       <h2>Timeline</h2>
+  //     </ImageListItem>
+  //     {postList.map((post) => (
+  //       <ImageListItem key={post.img}>
+  //         <img
+  //           // src={`${item.img}?w=248&fit=crop&auto=format`}
+  //           // srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
+  //           src="https://images.unsplash.com/photo-1551963831-b3b1ca40c98e?w=248&fit=crop&auto=format"
+  //           srcSet="https://images.unsplash.com/photo-1551963831-b3b1ca40c98e?w=248&fit=crop&auto=format&dpr=2 2x"
+  //           alt={post.hopName}
+  //           loading="lazy"
+  //         />
+  //         <ImageListItemBar
+  //           title={post.shopName}
+  //           subtitle={post.shopName}
+  //           actionIcon={
+  //             <IconButton
+  //               sx={{ color: "rgba(255, 255, 255, 0.54)" }}
+  //               aria-label={`info about ${post.shopName}`}
+  //             >
+  //               <ArrowCircleRightIcon />
+  //             </IconButton>
+  //           }
+  //         />
+  //       </ImageListItem>
+  //     ))}
+  //   </ImageList>
+  // );
 }
 
 const itemData = [

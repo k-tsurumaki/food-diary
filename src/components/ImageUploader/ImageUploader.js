@@ -13,7 +13,7 @@ const ImageUploader = () => {
         <input className="imageUploadInput" multiple name="imageURL" />
       </div>
       <Button variant="contained" className="imageUploadButton">
-        Upload image
+        Upload
         <input className="imageUploadInput" />
       </Button>
     </div>

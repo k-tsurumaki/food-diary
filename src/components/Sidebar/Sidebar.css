@@ -2,4 +2,15 @@
   flex: 0.3;
   margin-top: 20px;
   margin-left: 20px;
+  min-width: 200px !important;
+}
+
+.searchContent {
+  width: 100%;
+}
+
+.searchButton {
+  background-color: var(--app-color) !important;
+  margin-left: 10px !important;
+  margin-right: 10px !important;
 }

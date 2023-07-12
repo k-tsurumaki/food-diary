@@ -1,4 +1,5 @@
-.home {
-    display: flex;
-    
+.homePage {
+  display: flex;
+  height: calc(100vh - 70px);
+  width: 100%;
 }

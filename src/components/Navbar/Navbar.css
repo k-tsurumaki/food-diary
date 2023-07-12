@@ -3,6 +3,7 @@ nav {
   justify-content: space-between; 
   align-items: center;
   height: 70px;
+  min-width: 800px;
   background-color: var(--app-color);
   flex-wrap: wrap;
   box-shadow: 1px 1px 8px -2px #777777;
@@ -43,7 +44,7 @@ nav {
 }
 
 /* メディアクエリ */
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 800px) {
   .links a {
       flex-basis: 100%;  
   }
