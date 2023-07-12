@@ -1,0 +1,40 @@
+.createPostPage {
+  display: flex;
+  justify-content: center;
+}
+
+.postContainer {
+  background-color: white;
+  margin: 30px;
+  border-radius: 10px;
+  display: flex;
+  /* 縦並び */
+  flex-direction: column;
+  justify-content: center;
+  height: 600px;
+  width: 500px;
+  gap: 20px;
+  padding: 0 40px;
+  box-shadow: 5px 5px 5px -3px #787878;
+}
+
+.postContainer h1 {
+  text-align: center;
+  margin: 0;
+  color: #4b4b4b;
+}
+
+/* .postShopName {
+  margin-top: 40px !important;
+  height: 70px;
+} */
+
+.postContent {
+  margin-top: 40px !important;
+  height: 150px;
+}
+
+.postButton {
+  background-color: var(--app-color) !important;
+  color: white !important;
+}

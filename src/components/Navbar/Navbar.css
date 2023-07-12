@@ -3,18 +3,18 @@ nav {
   justify-content: space-between; 
   align-items: center;
   height: 70px;
-  background-color: var(--app-background);
+  background-color: var(--app-color);
   flex-wrap: wrap;
 }
 
-.navbar--icon {
+.icon {
   margin-right: auto;
-  color: var(--app-color);
+  color: var(--app-background);
   font-size: 40px !important;
   flex-basis: 100px;
 }
 
-.navbar--links {
+.links {
   display: flex;
   justify-content: flex-end;
   width: 20%;
@@ -22,7 +22,7 @@ nav {
   margin: 20px;
 }
 
-.navbar--links a {
+.links a {
   display: flex;
   flex-basis: 30%;
   align-items: center;
@@ -32,17 +32,17 @@ nav {
   font-size: 20px;
 }
 
-.navbar--links a:hover {
+.links a:hover {
   color: gray;
 }
 
-.navbar--links a .MuiSvgIcon-root {
+.links a .MuiSvgIcon-root {
   padding-right: 7px;
 }
 
 /* メディアクエリ */
 @media screen and (max-width: 600px) {
-  .navbar--links a {
-      flex-basis: 100%;  /* 変更 */
+  .links a {
+      flex-basis: 100%;  
   }
 }
