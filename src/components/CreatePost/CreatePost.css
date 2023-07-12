@@ -11,7 +11,7 @@
   /* 縦並び */
   flex-direction: column;
   justify-content: center;
-  height: 600px;
+  height: 1000px;
   width: 500px;
   gap: 20px;
   padding: 0 40px;
@@ -24,17 +24,17 @@
   color: #4b4b4b;
 }
 
-/* .postShopName {
+.postShopName {
   margin-top: 40px !important;
   height: 70px;
-} */
+}
 
 .postContent {
-  margin-top: 40px !important;
   height: 150px;
 }
 
 .postButton {
+  margin-top: 50px !important;
   background-color: var(--app-color) !important;
   color: white !important;
 }

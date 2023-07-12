@@ -4,7 +4,7 @@ import RestaurantIcon from "@mui/icons-material/Restaurant";
 import HomeIcon from "@mui/icons-material/Home";
 import PostAddIcon from "@mui/icons-material/PostAdd";
 import LoginIcon from "@mui/icons-material/Login";
-import LogoutIcon from '@mui/icons-material/Logout';
+import LogoutIcon from "@mui/icons-material/Logout";
 
 import "./Navbar.css";
 
@@ -17,20 +17,22 @@ const Navbar = ({ isAuth }) => {
           <HomeIcon />
           Home
         </Link>
-        <Link to="/createpost">
-          <PostAddIcon />
-          Post
-        </Link>
         {!isAuth ? (
           <Link to="/login">
             <LoginIcon />
             Login
           </Link>
         ) : (
-          <Link to="/logout">
-            <LogoutIcon />
-            Logout
-          </Link>
+          <>
+            <Link to="/createpost">
+              <PostAddIcon />
+              Post
+            </Link>
+            <Link to="/logout">
+              <LogoutIcon />
+              Logout
+            </Link>
+          </>
         )}
       </div>
     </nav>

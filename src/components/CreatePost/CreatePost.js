@@ -2,6 +2,7 @@ import { Button, TextField } from "@mui/material";
 import React from "react";
 import "./CreatePost.css";
 import Tags from "../Tags/Tags";
+import ImageUploader from "../ImageUploader/ImageUploader";
 // import GoogleMaps from "../GoogleMaps/GoogleMaps";
 
 const CreatePost = () => {
@@ -9,14 +10,14 @@ const CreatePost = () => {
     <div className="createPostPage">
       <div className="postContainer">
         <h1>New Post</h1>
-        {/* <TextField
+        <TextField
           className="postShopName"
           id="standard-required"
           label="Shop Name"
           variant="standard"
           color="warning"
-        /> */}
-        {/* <GoogleMaps /> */}
+        />
+        <ImageUploader />
         <TextField
           className="postContent"
           id="outlined-multiline-static"
@@ -25,7 +26,7 @@ const CreatePost = () => {
           multiline
           rows={4}
         />
-        <Tags />
+        <Tags className="postTags" />
         <Button variant="contained" className="postButton">
           Post
         </Button>
