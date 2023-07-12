@@ -1,0 +1,12 @@
+.imageList {
+  flex: 0.7;
+  min-width: 600px !important;
+}
+
+.imageList::-webkit-scrollbar {
+  display: none;
+}
+
+.imageListItem h2 {
+  margin-left: 20px;
+}

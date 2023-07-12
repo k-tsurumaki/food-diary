@@ -5,6 +5,8 @@ nav {
   height: 70px;
   background-color: var(--app-color);
   flex-wrap: wrap;
+  box-shadow: 1px 1px 8px -2px #777777;
+  border-radius: 0px;
 }
 
 .icon {

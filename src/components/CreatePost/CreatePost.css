@@ -1,6 +1,7 @@
 .createPostPage {
   display: flex;
   justify-content: center;
+  min-width: 250px;
 }
 
 .postContainer {
@@ -15,13 +16,14 @@
   width: 500px;
   gap: 20px;
   padding: 0 40px;
-  box-shadow: 5px 5px 5px -3px #787878;
+  box-shadow: 3px 3px 5px 0px #787878;
+  background-color: var(--app-background2);
 }
 
 .postContainer h1 {
   text-align: center;
   margin: 0;
-  color: #4b4b4b;
+  color: black;
 }
 
 .postShopName {
