@@ -31,7 +31,15 @@ export default function Tags({ setPostTags }) {
 }
 
 const categories = [
+  { category: "肉料理" },
+  { category: "海鮮料理" },
   { category: "寿司" },
+  { category: "焼き鳥" },
+  { category: "焼き肉" },
+  { category: "丼" },
+  { category: "うどん" },
+  { category: "そば" },
+  { category: "パスタ" },
   { category: "ピザ" },
   { category: "バーガー" },
   { category: "サンドイッチ" },
@@ -40,6 +48,7 @@ const categories = [
   { category: "つけ麺" },
   { category: "まぜそば" },
   { category: "カレー" },
+  { category: "和食" },
   { category: "フレンチ" },
   { category: "メキシカン料理" },
   { category: "中華料理" },
@@ -53,7 +62,14 @@ const categories = [
   { category: "ピリ辛料理" },
   { category: "ベジタリアン/ビーガン料理" },
   { category: "デザート" },
+  { category: "アイスクリーム" },
   { category: "コーヒー/ティー" },
   { category: "ジュース/スムージー" },
+  { category: "カフェ" },
   { category: "アルコール飲料" },
+  { category: "ご当地グルメ" },
+  { category: "居酒屋" },
+  { category: "いろいろ" },
+  { category: "自炊" },
+  { category: "その他" },
 ];

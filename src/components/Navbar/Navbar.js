@@ -5,7 +5,8 @@ import HomeIcon from "@mui/icons-material/Home";
 import PostAddIcon from "@mui/icons-material/PostAdd";
 import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
-
+import Avatar from "@mui/material/Avatar";
+import { auth } from "../../firebase";
 import "./Navbar.css";
 
 const Navbar = ({ isAuth }) => {
@@ -32,6 +33,7 @@ const Navbar = ({ isAuth }) => {
               <LogoutIcon />
               Logout
             </Link>
+            <Avatar alt="Travis Howard" src={auth.currentUser.photoURL} />
           </>
         )}
       </div>

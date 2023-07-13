@@ -5,7 +5,7 @@ import {
   InputAdornment,
   TextField,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./CreatePost.css";
 import Tags from "../Tags/Tags";
 import ImageUploader from "../ImageUploader/ImageUploader";
@@ -13,21 +13,19 @@ import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { auth, db } from "../../firebase";
 import { useNavigate } from "react-router-dom";
 
-const CreatePost = () => {
+const CreatePost = ({ isAuth }) => {
   const [shopName, setShopName] = useState("");
   const [postText, setPostText] = useState("");
+  const [cost, setCost] = useState("");
   const [postTags, setPostTags] = useState([]);
 
   const navigate = useNavigate();
 
   const createPost = async () => {
-    // console.log(shopName);
-    // console.log(postText);
-    // console.log(postTags);
-
     await addDoc(collection(db, "posts"), {
       shopName: shopName,
       postText: postText,
+      cost: cost,
       postTags: postTags,
       // auther: {
       //   username: auth.currentUser.displayName,
@@ -41,6 +39,12 @@ const CreatePost = () => {
     });
     navigate("/");
   };
+
+  useEffect(() => {
+    if (!isAuth) {
+      navigate("/login");
+    }
+  }, []);
 
   return (
     <div className="createPostPage">
@@ -73,6 +77,11 @@ const CreatePost = () => {
             inputProps={{
               "aria-label": "weight",
             }}
+            type="number"
+            min="0"
+            max="1000000"
+            defaultValue="1000"
+            onChange={(e) => setCost(e.target.value)}
           />
         </FormControl>
         <Tags className="postTags" color="warning" setPostTags={setPostTags} />
