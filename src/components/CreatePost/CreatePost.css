@@ -12,7 +12,7 @@
   /* 縦並び */
   flex-direction: column;
   justify-content: center;
-  height: 1000px;
+  height: 1100px;
   width: 500px;
   gap: 20px;
   padding: 0 40px;
@@ -33,6 +33,22 @@
 
 .postContent {
   height: 150px;
+}
+
+.postCost {
+  margin-top: 0 !important;
+}
+
+.postEvaluationContainer {
+  display: flex;
+  margin-top: 20px ;
+  text-align: center;
+  justify-content: center;
+  gap: 50px;
+}
+
+.postEvaluationContainer legend {
+  text-align: left;
 }
 
 .postButton {

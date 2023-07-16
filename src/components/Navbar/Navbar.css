@@ -14,6 +14,7 @@ nav {
   margin-right: auto;
   color: var(--app-background);
   font-size: 40px !important;
+  margin-left: 20px;
   flex-basis: 100px;
 }
 

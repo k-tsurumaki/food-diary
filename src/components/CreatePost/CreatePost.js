@@ -3,7 +3,9 @@ import {
   FormControl,
   Input,
   InputAdornment,
+  Rating,
   TextField,
+  Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import "./CreatePost.css";
@@ -16,7 +18,10 @@ import { useNavigate } from "react-router-dom";
 const CreatePost = ({ isAuth }) => {
   const [shopName, setShopName] = useState("");
   const [postText, setPostText] = useState("");
-  const [cost, setCost] = useState("");
+  const [cost, setCost] = useState(1000);
+  const [tasteValue, setTasteValue] = useState(3);
+  const [moodValue, setMoodValue] = useState(3);
+  const [overallValue, setOverall] = useState(3);
   const [postTags, setPostTags] = useState([]);
 
   const navigate = useNavigate();
@@ -26,6 +31,9 @@ const CreatePost = ({ isAuth }) => {
       shopName: shopName,
       postText: postText,
       cost: cost,
+      taste: tasteValue,
+      mood: moodValue,
+      overall: overallValue,
       postTags: postTags,
       // auther: {
       //   username: auth.currentUser.displayName,
@@ -68,7 +76,11 @@ const CreatePost = ({ isAuth }) => {
           rows={4}
           onChange={(e) => setPostText(e.target.value)}
         />
-        <FormControl variant="standard" sx={{ mt: 3, width: "10ch" }}>
+        <FormControl
+          className="postCost"
+          variant="standard"
+          sx={{ mt: 3, width: "10ch" }}
+        >
           <Input
             id="standard-adornment-weight"
             endAdornment={<InputAdornment position="end">円</InputAdornment>}
@@ -84,6 +96,38 @@ const CreatePost = ({ isAuth }) => {
             onChange={(e) => setCost(e.target.value)}
           />
         </FormControl>
+        <div className="postEvaluationContainer">
+          <div className="postEvatuation">
+            <Typography component="legend">Taste</Typography>
+            <Rating
+              name="simple-controlled"
+              value={tasteValue}
+              onChange={(event, newValue) => {
+                setTasteValue(newValue);
+              }}
+            />
+          </div>
+          <div className="postEvatuation">
+            <Typography component="legend">Mood</Typography>
+            <Rating
+              name="simple-controlled"
+              value={moodValue}
+              onChange={(event, newValue) => {
+                setMoodValue(newValue);
+              }}
+            />
+          </div>
+          <div className="postEvatuation">
+            <Typography component="legend">Overall</Typography>
+            <Rating
+              name="simple-controlled"
+              value={overallValue}
+              onChange={(event, newValue) => {
+                setOverall(newValue);
+              }}
+            />
+          </div>
+        </div>
         <Tags className="postTags" color="warning" setPostTags={setPostTags} />
         <Button variant="contained" className="postButton" onClick={createPost}>
           Post

@@ -12,7 +12,9 @@ import "./Navbar.css";
 const Navbar = ({ isAuth }) => {
   return (
     <nav>
-      <RestaurantIcon className="icon" />
+      <Link to="/">
+        <RestaurantIcon className="icon" />
+      </Link>
       <div className="links">
         <Link to="/">
           <HomeIcon />
@@ -33,7 +35,7 @@ const Navbar = ({ isAuth }) => {
               <LogoutIcon />
               Logout
             </Link>
-            <Avatar alt="Travis Howard" src={auth.currentUser.photoURL} />
+            {/* <Avatar alt="Travis Howard" src={auth.currentUser.photoURL} /> */}
           </>
         )}
       </div>
