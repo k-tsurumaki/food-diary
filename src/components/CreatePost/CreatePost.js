@@ -23,12 +23,17 @@ const CreatePost = ({ isAuth }) => {
   const [moodValue, setMoodValue] = useState(3);
   const [overallValue, setOverall] = useState(3);
   const [postTags, setPostTags] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [isUploaded, setIsUploaded] = useState(false);
+  const [imageUrl, setImageUrl] = useState("");
 
   const navigate = useNavigate();
+
 
   const createPost = async () => {
     await addDoc(collection(db, "posts"), {
       shopName: shopName,
+      image: imageUrl,
       postText: postText,
       cost: cost,
       taste: tasteValue,
@@ -66,7 +71,14 @@ const CreatePost = ({ isAuth }) => {
           color="warning"
           onChange={(e) => setShopName(e.target.value)}
         />
-        <ImageUploader />
+        <ImageUploader
+          loading={loading}
+          setLoading={setLoading}
+          isUploaded={isUploaded}
+          setIsUploaded={setIsUploaded}
+          imageUrl={imageUrl}
+          setImageUrl={setImageUrl}
+        />
         <TextField
           className="postContent"
           id="outlined-multiline-static"
