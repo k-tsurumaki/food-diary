@@ -28,10 +28,21 @@
   padding: 36px;
 }
 
+.uploadedImageContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 321.99px;
+  padding: 0 36px;
+}
+
 .uploadedImage {
   text-align: center;
   height: 100%;
   width: 100%;
+  padding:none;
 }
 
 .imageUploadBox {

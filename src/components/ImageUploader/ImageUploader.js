@@ -22,6 +22,7 @@ const ImageUploader = ({ loading, setLoading, isUploaded, setIsUploaded, imageUr
     uploadImage.on(
       "state_changed",
       (snapshot) => {
+        // アップロードの進行状況のパーセンテージ計算
         const progress =
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         // console.log("Upload is " + progress + "% done");
@@ -34,6 +35,7 @@ const ImageUploader = ({ loading, setLoading, isUploaded, setIsUploaded, imageUr
       () => {
         setLoading(false);
         setIsUploaded(true);
+        // アップロードした画像へのリンクを格納
         getDownloadURL(uploadImage.snapshot.ref).then((downloadURL) => {
           // console.log("File available at", downloadURL);
           setImageUrl(downloadURL);
@@ -52,7 +54,7 @@ const ImageUploader = ({ loading, setLoading, isUploaded, setIsUploaded, imageUr
       ) : (
         <>
           {isUploaded ? (
-            <div className="uploadImageContainer ">
+            <div className="uploadedImageContainer ">
               <img
                 className="uploadedImage"
                 src={imageUrl}

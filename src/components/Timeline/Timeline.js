@@ -5,7 +5,7 @@ import ImageListItem from "@mui/material/ImageListItem";
 import ImageListItemBar from "@mui/material/ImageListItemBar";
 import IconButton from "@mui/material/IconButton";
 import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import { db } from "../../firebase";
 
 export default function Timeline() {
@@ -13,10 +13,12 @@ export default function Timeline() {
 
   useEffect(() => {
     const getPosts = async () => {
-      const data = await getDocs(collection(db, "posts"));
+      const q = query(collection(db, "posts"), orderBy("timestamp", "desc"));
+      // const data = await getDocs(collection(db, "posts"));
       // data.docs.map((doc) =>
       //   doc.data().postTags.map((tag) => console.log(tag.category))
       // );
+      const data = await getDocs(q);
       setPostList(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     };
     getPosts();
@@ -24,20 +26,34 @@ export default function Timeline() {
 
   return (
     <ImageList sx={{ width: 800, height: 1100 }} className="imageList">
-      <ImageListItem key="Subheader" cols={2} className="imageListItem">
+      {/* <ImageListItem key="Subheader" cols={2} className="imageListItem">
         <h2>Timeline</h2>
-      </ImageListItem>
+      </ImageListItem> */}
       {postList.map((post) => (
         <ImageListItem key={post.id}>
-          <img
-            src="https://firebasestorage.googleapis.com/v0/b/food-diary-e72b4.appspot.com/o/images%2F%E5%86%99%E7%9C%9F%202023-04-21%2018%2044%2054.jpg?alt=media&token=3693417f-5b05-481c-9c90-97cc2a8b2c62"
-            srcSet="https://firebasestorage.googleapis.com/v0/b/food-diary-e72b4.appspot.com/o/images%2F%E5%86%99%E7%9C%9F%202023-04-21%2018%2044%2054.jpg?alt=media&token=3693417f-5b05-481c-9c90-97cc2a8b2c62&dpr=2 2x"
-            alt={post.shopName}
-            loading="lazy"
-          />
+          <div className="imageContainer">
+            <img
+              className="image"
+              src={post.image}
+              srcSet={post.image + "&dpr=2 2x"}
+              alt={post.shopName}
+              loading="lazy"
+            />
+          </div>
           <ImageListItemBar
             title={post.shopName}
-            subtitle={post.userName}
+            subtitle={
+              "@" +
+              post.userName +
+              " " +
+              new Intl.DateTimeFormat("ja-JP", {
+                year: "numeric",
+                month: "long",
+                day: "2-digit",
+                hour: "2-digit",
+                minute: "2-digit",
+              }).format(post.timestamp.toDate())
+            }
             actionIcon={
               <IconButton
                 sx={{ color: "rgba(255, 255, 255, 0.54)" }}
