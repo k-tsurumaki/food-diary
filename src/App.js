@@ -6,6 +6,7 @@ import Login from "./components/Login/Login";
 import Logout from "./components/Logout/Logout";
 import Navbar from "./components/Navbar/Navbar";
 import { useState } from "react";
+import Post from "./components/Post/Post";
 
 function App() {
   const [isAuth, setIsAuth] = useState(localStorage.getItem("isAuth"));
@@ -18,6 +19,10 @@ function App() {
           <Route
             path="/createpost"
             element={<CreatePost isAuth={isAuth} />}
+          ></Route>
+          <Route
+            path="/post/:postId"
+            element={<Post isAuth={isAuth} />}
           ></Route>
           <Route
             path="/login"

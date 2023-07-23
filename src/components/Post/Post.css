@@ -1,0 +1,59 @@
+.postPage {
+    display: flex;
+    justify-content: center;
+    min-width: 250px !important;
+  }
+  
+  .postContainer {
+    background-color: white;
+    margin: 30px;
+    border-radius: 10px;
+    display: flex;
+    /* 縦並び */
+    flex-direction: column;
+    justify-content: center;
+    height: 1100px;
+    width: 500px;
+    gap: 20px;
+    padding: 0 40px;
+    box-shadow: 3px 3px 5px 0px #787878;
+    background-color: var(--app-background2);
+  }
+  
+  .postContainer h1 {
+    text-align: center;
+    margin: 0;
+    color: black;
+  }
+  
+  .postShopName {
+    margin-top: 40px !important;
+    height: 70px;
+  }
+  
+  .postContent {
+    height: 150px;
+  }
+  
+  .postCost {
+    margin-top: 0 !important;
+  }
+  
+  .postEvaluationContainer {
+    display: flex;
+    margin-top: 20px ;
+    text-align: center;
+    justify-content: center;
+    gap: 50px;
+  }
+  
+  .postEvaluationContainer legend {
+    text-align: left;
+  }
+  
+  .postButton {
+    margin-top: 50px !important;
+    background-color: var(--app-color) !important;
+    color: white !important;
+  }
+  
