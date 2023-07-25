@@ -33,7 +33,7 @@ nav {
   text-decoration: none;
   color: white;
   transition: all 0.2s;
-  font-size: 20px;
+  font-size: 20px !important;
 }
 
 .links a:hover {
@@ -41,7 +41,7 @@ nav {
 }
 
 .links a .MuiSvgIcon-root {
-  padding-right: 7px;
+  padding-right: 7px !important;
 }
 
 /* メディアクエリ */

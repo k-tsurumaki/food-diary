@@ -11,3 +11,13 @@ body {
   max-width: 1300px;
   margin: 0 auto;
 }
+
+/* Chrome, Safari, Edge */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Firefox */
+html {
+  scrollbar-width: none;
+}
