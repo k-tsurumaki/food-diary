@@ -4,6 +4,7 @@ nav {
   align-items: center;
   height: 70px;
   min-width: 800px;
+  padding: 0 0 10px 0;
   background-color: var(--app-color);
   flex-wrap: wrap;
   box-shadow: 1px 1px 8px -2px #777777;
@@ -16,6 +17,7 @@ nav {
   align-items: center;
   text-decoration: none;
   width: 250px;
+  margin-top: 0;
 }
 
 .icon {

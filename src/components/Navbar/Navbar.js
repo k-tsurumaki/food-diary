@@ -3,17 +3,15 @@ import { Link } from "react-router-dom";
 import RestaurantIcon from "@mui/icons-material/Restaurant";
 import HomeIcon from "@mui/icons-material/Home";
 import PostAddIcon from "@mui/icons-material/PostAdd";
-import LogoutIcon from "@mui/icons-material/Logout";
 import "./Navbar.css";
+import AccountMenu from "../AccountMenu/AcountMenu";
 
-const Navbar = ({ isAuth }) => {
+const Navbar = ({ isAuth, setIsAuth }) => {
   return (
     <nav>
       <Link to="/" className="appLink">
         <RestaurantIcon className="icon" />
-        <h1 className="appName">
-          Food Diary
-        </h1>
+        <h1 className="appName">Food Diary</h1>
       </Link>
       <div className="links">
         {isAuth && (
@@ -26,11 +24,7 @@ const Navbar = ({ isAuth }) => {
               <PostAddIcon />
               Post
             </Link>
-            <Link to="/logout">
-              <LogoutIcon />
-              Logout
-            </Link>
-            {/* <Avatar alt="Travis Howard" src={auth.currentUser.photoURL} /> */}
+            <AccountMenu setIsAuth={setIsAuth}></AccountMenu>
           </>
         )}
       </div>

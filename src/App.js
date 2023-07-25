@@ -4,21 +4,47 @@ import {
   Routes,
   Route,
   useLocation,
+  useNavigate,
 } from "react-router-dom";
 import Home from "./components/Home/Home";
 import CreatePost from "./components/CreatePost/CreatePost";
 import Login from "./components/Login/Login";
-import Logout from "./components/Logout/Logout";
 import Navbar from "./components/Navbar/Navbar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Post from "./components/Post/Post";
 
-function NavbarWrapper({ isAuth }) {
+function NavbarWrapper({ isAuth, setIsAuth }) {
   const location = useLocation();
   if (location.pathname === "/login") {
     return null;
   }
-  return <Navbar isAuth={isAuth} />;
+  return <Navbar isAuth={isAuth} setIsAuth={setIsAuth} />;
+}
+
+function ProtectedRoutes({ isAuth, setIsAuth }) {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    if (!isAuth && location.pathname !== "/login") {
+      navigate("/login");
+    }
+  }, [isAuth, navigate, location]);
+
+  return (
+    <Routes>
+      <Route path="/" element={<Home />}></Route>
+      <Route
+        path="/createpost"
+        element={<CreatePost isAuth={isAuth} />}
+      ></Route>
+      <Route path="/post/:postId" element={<Post isAuth={isAuth} />}></Route>
+      <Route
+        path="/login"
+        element={<Login isAuth={isAuth} setIsAuth={setIsAuth} />}
+      ></Route>
+    </Routes>
+  );
 }
 
 function App() {
@@ -27,26 +53,8 @@ function App() {
   return (
     <Router>
       <div className="app">
-        <NavbarWrapper isAuth={isAuth} />
-        <Routes>
-          <Route path="/" element={<Home />}></Route>
-          <Route
-            path="/createpost"
-            element={<CreatePost isAuth={isAuth} />}
-          ></Route>
-          <Route
-            path="/post/:postId"
-            element={<Post isAuth={isAuth} />}
-          ></Route>
-          <Route
-            path="/login"
-            element={<Login isAuth={isAuth} setIsAuth={setIsAuth} />}
-          ></Route>
-          <Route
-            path="/logout"
-            element={<Logout setIsAuth={setIsAuth} />}
-          ></Route>
-        </Routes>
+        <NavbarWrapper isAuth={isAuth} setIsAuth={setIsAuth} />
+        <ProtectedRoutes isAuth={isAuth} setIsAuth={setIsAuth} />
       </div>
     </Router>
   );
