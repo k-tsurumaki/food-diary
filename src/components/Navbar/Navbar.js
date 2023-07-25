@@ -9,8 +9,11 @@ import "./Navbar.css";
 const Navbar = ({ isAuth }) => {
   return (
     <nav>
-      <Link to="/">
+      <Link to="/" className="appLink">
         <RestaurantIcon className="icon" />
+        <h1 className="appName">
+          Food Diary
+        </h1>
       </Link>
       <div className="links">
         {isAuth && (

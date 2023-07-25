@@ -1,6 +1,6 @@
 nav {
   display: flex;
-  justify-content: space-between; 
+  justify-content: space-between;
   align-items: center;
   height: 70px;
   min-width: 800px;
@@ -10,12 +10,24 @@ nav {
   border-radius: 0px;
 }
 
+.appLink {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  width: 250px;
+}
+
 .icon {
   margin-right: auto;
   color: var(--app-background);
   font-size: 40px !important;
   margin-left: 20px;
   flex-basis: 100px;
+}
+
+.appName {
+  color: white;
 }
 
 .links {
@@ -47,6 +59,6 @@ nav {
 /* メディアクエリ */
 @media screen and (max-width: 800px) {
   .links a {
-      flex-basis: 100%;  
+    flex-basis: 100%;
   }
 }
