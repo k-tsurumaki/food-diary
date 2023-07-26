@@ -29,27 +29,37 @@ const Post = ({ isAuth }) => {
   }, []);
 
   if (!selectedPost) {
-    return <LinearProgress color="warning"/>; // 非同期処理が完了するまでローディングメッセージを表示
+    // 非同期処理が完了するまでローディングバーを表示
+    return <LinearProgress color="warning" />;
   }
 
   return (
     <div className="postPage">
       <div className="postContainer">
-        <h1>New Post</h1>
-        <TextField
-          className="postShopName"
-          id="standard-required"
-          label="Shop Name"
-          variant="standard"
-          color="warning"
-        />
+        <div className="imageContainer">
+          <img
+            className="image"
+            src={selectedPost.image}
+            srcSet={selectedPost.image + "&dpr=2 2x"}
+            alt={selectedPost.shopName}
+            loading="lazy"
+          />
+          <h2 className="text-over-image">{selectedPost.shopName}</h2>
+        </div>
         <TextField
           className="postContent"
           id="outlined-multiline-static"
           label="Content"
           color="warning"
+          variant="filled" // 追加
           multiline
           rows={4}
+          defaultValue={selectedPost.postText}
+          disabled
+          InputProps={{
+            // 追加
+            readOnly: true,
+          }}
         />
         <FormControl
           className="postCost"

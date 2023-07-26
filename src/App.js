@@ -15,6 +15,7 @@ import Post from "./components/Post/Post";
 
 function NavbarWrapper({ isAuth, setIsAuth }) {
   const location = useLocation();
+  // ログインページでは表示しない
   if (location.pathname === "/login") {
     return null;
   }
@@ -26,6 +27,7 @@ function ProtectedRoutes({ isAuth, setIsAuth }) {
   const location = useLocation();
 
   useEffect(() => {
+    // ログインしてない場合はログインページにリダイレクト
     if (!isAuth && location.pathname !== "/login") {
       navigate("/login");
     }

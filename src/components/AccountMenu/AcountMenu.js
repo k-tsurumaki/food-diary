@@ -9,32 +9,59 @@ import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import { auth, provider } from "../../firebase";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTheme } from "@mui/material/styles";
 
 const AccountMenu = ({ setIsAuth }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [openDialog, setOpenDialog] = React.useState(false);
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
   const open = Boolean(anchorEl);
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
+
   const handleClose = () => {
     setAnchorEl(null);
   };
-  const navigate = useNavigate();
+
+  const handleOpenDialog = () => {
+    setOpenDialog(true);
+  };
+
+  const handleCloseDialog = () => {
+    setOpenDialog(false);
+  };
+
   const logout = () => {
-    // ログアウト
+    // ダイアログを表示
+    handleOpenDialog();
+  };
+
+  const confirmLogout = () => {
     signOut(auth, provider).then((results) => {
-      // ローカルストレージの内容を消去
       localStorage.clear();
 
       setIsAuth(false);
 
-      // ログアウトするとLoginにリダイレクト
+      // ログインページにリダイレクト
       navigate("/login");
     });
   };
+
+  const navigate = useNavigate();
+
   return (
     <React.Fragment>
       <Box
@@ -113,6 +140,28 @@ const AccountMenu = ({ setIsAuth }) => {
           Logout
         </MenuItem>
       </Menu>
+      <Dialog
+        fullScreen={fullScreen}
+        open={openDialog}
+        onClose={handleCloseDialog}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{"Confirm Logout"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Are you sure you want to logout?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseDialog} color="primary">
+            No
+          </Button>
+          <Button onClick={confirmLogout} color="primary" autoFocus>
+            Yes
+          </Button>
+        </DialogActions>
+      </Dialog>
     </React.Fragment>
   );
 };
