@@ -3,21 +3,33 @@ import React, { useState } from "react";
 import ImageLogo from "./image.svg";
 import "./ImageUploader.css";
 import { storage } from "../../firebase";
-import CircularProgressWithLabel from "../CircularProgressWithLabel/CircularProgressWithLabel"
-import {
-  getDownloadURL,
-  ref,
-  uploadBytesResumable,
-} from "firebase/storage";
+import CircularProgressWithLabel from "../CircularProgressWithLabel/CircularProgressWithLabel";
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 
-const ImageUploader = ({ loading, setLoading, isUploaded, setIsUploaded, imageUrl, setImageUrl }) => {
+const ImageUploader = ({
+  loading,
+  setLoading,
+  isUploaded,
+  setIsUploaded,
+  imageUrl,
+  setImageUrl,
+}) => {
   // アップロードの進行状況（画面に表示する）
   const [uploadProgress, setUploadProgress] = useState(0);
 
   const OnFileUploadToFirebase = (e) => {
     // console.log(e.target.files);
     const file = e.target.files[0];
-    const storageRef = ref(storage, "images/" + file.name);
+
+    // 画像名にランダムな文字列を追加
+    const S = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    const N = 16;
+    const randomChar = Array.from(crypto.getRandomValues(new Uint32Array(N)))
+      .map((n) => S[n % S.length])
+      .join("");
+    const fileName = randomChar + "_" + file.name;
+    const storageRef = ref(storage, "images/" + fileName);
+    
     const uploadImage = uploadBytesResumable(storageRef, file);
     uploadImage.on(
       "state_changed",
@@ -25,7 +37,6 @@ const ImageUploader = ({ loading, setLoading, isUploaded, setIsUploaded, imageUr
         // アップロードの進行状況のパーセンテージ計算
         const progress =
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        // console.log("Upload is " + progress + "% done");
         setUploadProgress(progress);
         setLoading(true);
       },
@@ -37,7 +48,6 @@ const ImageUploader = ({ loading, setLoading, isUploaded, setIsUploaded, imageUr
         setIsUploaded(true);
         // アップロードした画像へのリンクを格納
         getDownloadURL(uploadImage.snapshot.ref).then((downloadURL) => {
-          // console.log("File available at", downloadURL);
           setImageUrl(downloadURL);
         });
       }
