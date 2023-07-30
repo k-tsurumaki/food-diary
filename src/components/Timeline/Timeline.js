@@ -8,6 +8,16 @@ import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";
 import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import { db } from "../../firebase";
 import { Link } from "react-router-dom";
+import { Box, Rating, Typography } from "@mui/material";
+import StarIcon from "@mui/icons-material/Star";
+
+const labels = {
+  1: "Bad",
+  2: "Poor",
+  3: "Ok",
+  4: "Good",
+  5: "Excellent",
+};
 
 export default function Timeline() {
   const [postList, setPostList] = useState([]);
@@ -27,12 +37,27 @@ export default function Timeline() {
 
   return (
     <ImageList sx={{ width: 800, height: 1100 }} className="imageList">
-      {/* <ImageListItem key="Subheader" cols={2} className="imageListItem">
-        <h2>Timeline</h2>
-      </ImageListItem> */}
       {postList.map((post) => (
-        <Link to={`/post/${post.id}`} key={post.id}>
-          <ImageListItem >
+        <Link className="postLink" to={`/post/${post.id}`} key={post.id}>
+          <Box
+            sx={{
+              width: 200,
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
+            <Rating
+              name="read-only"
+              value={post.overall}
+              readOnly
+              precision={0.5}
+              emptyIcon={
+                <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
+              }
+            />
+            <Typography sx={{ ml: 2 }} >{labels[post.overall]}</Typography>
+          </Box>
+          <ImageListItem>
             <div className="imageContainer">
               <img
                 className="image"

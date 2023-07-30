@@ -26,3 +26,9 @@
   padding-top: 75%;
   min-width: 300px;
 }
+
+.postLink { 
+  color: black !important;
+  text-decoration: none !important;
+
+}
