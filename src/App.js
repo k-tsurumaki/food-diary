@@ -13,16 +13,23 @@ import Navbar from "./components/Navbar/Navbar";
 import { useEffect, useState } from "react";
 import Post from "./components/Post/Post";
 
-function NavbarWrapper({ isAuth, setIsAuth }) {
+function NavbarWrapper({ isAuth, setIsAuth, photoURL, setPhotoURL }) {
   const location = useLocation();
   // ログインページでは表示しない
   if (location.pathname === "/login") {
     return null;
   }
-  return <Navbar isAuth={isAuth} setIsAuth={setIsAuth} />;
+  return (
+    <Navbar
+      isAuth={isAuth}
+      setIsAuth={setIsAuth}
+      photoURL={photoURL}
+      setPhotoURL={setPhotoURL}
+    />
+  );
 }
 
-function ProtectedRoutes({ isAuth, setIsAuth }) {
+function ProtectedRoutes({ isAuth, setIsAuth, photoURL, setPhotoURL }) {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -43,7 +50,14 @@ function ProtectedRoutes({ isAuth, setIsAuth }) {
       <Route path="/post/:postId" element={<Post isAuth={isAuth} />}></Route>
       <Route
         path="/login"
-        element={<Login isAuth={isAuth} setIsAuth={setIsAuth} />}
+        element={
+          <Login
+            isAuth={isAuth}
+            setIsAuth={setIsAuth}
+            photoURL={photoURL}
+            setPhotoURL={setPhotoURL}
+          />
+        }
       ></Route>
     </Routes>
   );
@@ -51,12 +65,25 @@ function ProtectedRoutes({ isAuth, setIsAuth }) {
 
 function App() {
   const [isAuth, setIsAuth] = useState(localStorage.getItem("isAuth"));
+  const [photoURL, setPhotoURL] = useState(localStorage.getItem("photoURL"));
+
+  // console.log(photoURL);
 
   return (
     <Router>
       <div className="app">
-        <NavbarWrapper isAuth={isAuth} setIsAuth={setIsAuth} />
-        <ProtectedRoutes isAuth={isAuth} setIsAuth={setIsAuth} />
+        <NavbarWrapper
+          isAuth={isAuth}
+          setIsAuth={setIsAuth}
+          photoURL={photoURL}
+          setPhotoURL={setPhotoURL}
+        />
+        <ProtectedRoutes
+          isAuth={isAuth}
+          setIsAuth={setIsAuth}
+          photoURL={photoURL}
+          setPhotoURL={setPhotoURL}
+        />
       </div>
     </Router>
   );

@@ -21,7 +21,7 @@ import { auth, provider } from "../../firebase";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 
-const AccountMenu = ({ setIsAuth }) => {
+const AccountMenu = ({ setIsAuth, photoURL, setPhotoURL }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [openDialog, setOpenDialog] = React.useState(false);
   const theme = useTheme();
@@ -54,6 +54,7 @@ const AccountMenu = ({ setIsAuth }) => {
       localStorage.clear();
 
       setIsAuth(false);
+      setPhotoURL("");
 
       // ログインページにリダイレクト
       navigate("/login");
@@ -81,7 +82,11 @@ const AccountMenu = ({ setIsAuth }) => {
             aria-haspopup="true"
             aria-expanded={open ? "true" : undefined}
           >
-            <Avatar sx={{ width: 32, height: 32 }}></Avatar>
+            {photoURL ? (
+              <Avatar sx={{ width: 32, height: 32 }} src={photoURL}></Avatar>
+            ) : (
+              <Avatar sx={{ width: 32, height: 32 }}></Avatar>
+            )}
           </IconButton>
         </Tooltip>
       </Box>
@@ -121,10 +126,12 @@ const AccountMenu = ({ setIsAuth }) => {
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
         <MenuItem onClick={handleClose}>
-          <Avatar /> Profile
+          {photoURL ? <Avatar src={photoURL} /> : <Avatar />}
+          Profile
         </MenuItem>
         <MenuItem onClick={handleClose}>
-          <Avatar /> My account
+          {photoURL ? <Avatar src={photoURL} /> : <Avatar />}
+          MyAccount
         </MenuItem>
         <Divider />
         <MenuItem onClick={handleClose}>
@@ -141,7 +148,7 @@ const AccountMenu = ({ setIsAuth }) => {
         </MenuItem>
       </Menu>
       <Dialog
-        fullScreen={fullScreen}
+        // fullScreen={fullScreen}
         open={openDialog}
         onClose={handleCloseDialog}
         aria-labelledby="alert-dialog-title"

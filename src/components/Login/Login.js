@@ -31,15 +31,17 @@ function Copyright(props) {
 
 const defaultTheme = createTheme();
 
-const Login = ({ isAuth, setIsAuth }) => {
+const Login = ({ isAuth, setIsAuth, photoURL, setPhotoURL}) => {
   const navigate = useNavigate();
   const loginInWithGoogle = () => {
     // Googleでログイン
     signInWithPopup(auth, provider).then((results) => {
       // ローカルストレージに保存
       localStorage.setItem("isAuth", true);
+      localStorage.setItem("photoURL", auth.currentUser.photoURL);
 
       setIsAuth(true);
+      setPhotoURL(auth.currentUser.photoURL);
 
       // ログインするとHomeにリダイレクト
       navigate("/");
@@ -51,7 +53,12 @@ const Login = ({ isAuth, setIsAuth }) => {
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Grid container component="main" sx={{ height: "100vh" }} className="main">
+      <Grid
+        container
+        component="main"
+        sx={{ height: "100vh" }}
+        className="main"
+      >
         <CssBaseline />
         <Grid
           item

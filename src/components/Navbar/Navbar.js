@@ -5,8 +5,10 @@ import HomeIcon from "@mui/icons-material/Home";
 import PostAddIcon from "@mui/icons-material/PostAdd";
 import "./Navbar.css";
 import AccountMenu from "../AccountMenu/AcountMenu";
+import TemporaryDrawer from "../TemporaryDrawer/TemporaryDrawer";
+import { LinearProgress } from "@mui/material";
 
-const Navbar = ({ isAuth, setIsAuth }) => {
+const Navbar = ({ isAuth, setIsAuth, photoURL, setPhotoURL }) => {
   return (
     <nav>
       <Link to="/" className="appLink">
@@ -24,7 +26,12 @@ const Navbar = ({ isAuth, setIsAuth }) => {
               <PostAddIcon />
               Post
             </Link>
-            <AccountMenu setIsAuth={setIsAuth}></AccountMenu>
+            {/* <TemporaryDrawer anchor="right" anchorText="Search"/> */}
+            <AccountMenu
+              setIsAuth={setIsAuth}
+              photoURL={photoURL}
+              setPhotoURL={setPhotoURL}
+            ></AccountMenu>
           </>
         )}
       </div>
