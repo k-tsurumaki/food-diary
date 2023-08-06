@@ -21,6 +21,7 @@ import { auth, provider } from "../../firebase";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 
+// ナビゲーションバーのアイコンをクリックした時に表示されるメニュー
 const AccountMenu = ({ setIsAuth, photoURL, setPhotoURL }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [openDialog, setOpenDialog] = React.useState(false);
@@ -53,6 +54,7 @@ const AccountMenu = ({ setIsAuth, photoURL, setPhotoURL }) => {
     signOut(auth, provider).then((results) => {
       localStorage.clear();
 
+      // ローカルストレージを初期化
       setIsAuth(false);
       setPhotoURL("");
 
@@ -125,14 +127,15 @@ const AccountMenu = ({ setIsAuth, photoURL, setPhotoURL }) => {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
+        {/* TODO:表示名とアイコンの変更 */}
         <MenuItem onClick={handleClose}>
           {photoURL ? <Avatar src={photoURL} /> : <Avatar />}
           Profile
         </MenuItem>
-        <MenuItem onClick={handleClose}>
+        {/* <MenuItem onClick={handleClose}>
           {photoURL ? <Avatar src={photoURL} /> : <Avatar />}
           MyAccount
-        </MenuItem>
+        </MenuItem> */}
         <Divider />
         <MenuItem onClick={handleClose}>
           <ListItemIcon>

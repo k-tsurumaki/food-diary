@@ -5,17 +5,17 @@ import HomeIcon from "@mui/icons-material/Home";
 import PostAddIcon from "@mui/icons-material/PostAdd";
 import "./Navbar.css";
 import AccountMenu from "../AccountMenu/AcountMenu";
-import TemporaryDrawer from "../TemporaryDrawer/TemporaryDrawer";
-import { LinearProgress } from "@mui/material";
 
 const Navbar = ({ isAuth, setIsAuth, photoURL, setPhotoURL }) => {
   return (
     <nav>
       <Link to="/" className="appLink">
+        {/* TODO：オリジナルのアイコンを作る */}
         <RestaurantIcon className="icon" />
         <h1 className="appName">Food Diary</h1>
       </Link>
       <div className="links">
+        {/* 認証していれば表示する */}
         {isAuth && (
           <>
             <Link to="/">

@@ -64,6 +64,9 @@ function ProtectedRoutes({ isAuth, setIsAuth, photoURL, setPhotoURL }) {
 }
 
 function App() {
+  // ローカルストレージに保存
+  // ・認証情報
+  // ・アイコン画像へのパス
   const [isAuth, setIsAuth] = useState(localStorage.getItem("isAuth"));
   const [photoURL, setPhotoURL] = useState(localStorage.getItem("photoURL"));
 

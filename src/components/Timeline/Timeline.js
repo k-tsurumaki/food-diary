@@ -39,24 +39,6 @@ export default function Timeline() {
     <ImageList sx={{ width: 800, height: 1100 }} className="imageList">
       {postList.map((post) => (
         <Link className="postLink" to={`/post/${post.id}`} key={post.id}>
-          <Box
-            sx={{
-              width: 200,
-              display: "flex",
-              alignItems: "center",
-            }}
-          >
-            <Rating
-              name="read-only"
-              value={post.overall}
-              readOnly
-              precision={0.5}
-              emptyIcon={
-                <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
-              }
-            />
-            <Typography sx={{ ml: 2 }} >{labels[post.overall]}</Typography>
-          </Box>
           <ImageListItem>
             <div className="imageContainer">
               <img
@@ -91,6 +73,24 @@ export default function Timeline() {
               }
             />
           </ImageListItem>
+          <Box
+            sx={{
+              width: 200,
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
+            <Rating
+              name="read-only"
+              value={post.overall}
+              readOnly
+              precision={0.5}
+              emptyIcon={
+                <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
+              }
+            />
+            <Typography sx={{ ml: 2 }} >{labels[post.overall]}</Typography>
+          </Box>
         </Link>
       ))}
     </ImageList>
