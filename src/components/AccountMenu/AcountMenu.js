@@ -18,15 +18,15 @@ import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import { auth, provider } from "../../firebase";
-import useMediaQuery from "@mui/material/useMediaQuery";
-import { useTheme } from "@mui/material/styles";
+// import useMediaQuery from "@mui/material/useMediaQuery";
+// import { useTheme } from "@mui/material/styles";
 
 // ナビゲーションバーのアイコンをクリックした時に表示されるメニュー
 const AccountMenu = ({ setIsAuth, photoURL, setPhotoURL }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [openDialog, setOpenDialog] = React.useState(false);
-  const theme = useTheme();
-  const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
+  // const theme = useTheme();
+  // const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
   const open = Boolean(anchorEl);
 
   const handleClick = (event) => {

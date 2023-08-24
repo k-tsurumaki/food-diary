@@ -39,11 +39,6 @@ const CreatePost = ({ isAuth }) => {
       mood: moodValue,
       overall: overallValue,
       postTags: postTags,
-      // auther: {
-      //   username: auth.currentUser.displayName,
-      //   id: auth.currentUser.uid,
-      //   icon: auth.currentUser.photoURL,
-      // },
       userName: auth.currentUser.displayName,
       userId: auth.currentUser.uid,
       userIcon: auth.currentUser.photoURL,
