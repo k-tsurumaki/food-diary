@@ -56,3 +56,7 @@
   background-color: var(--app-color) !important;
   color: white !important;
 }
+
+.postButton:disabled {
+  background-color: gray !important;
+}

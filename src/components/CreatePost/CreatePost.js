@@ -29,7 +29,6 @@ const CreatePost = ({ isAuth }) => {
 
   const navigate = useNavigate();
 
-
   const createPost = async () => {
     await addDoc(collection(db, "posts"), {
       shopName: shopName,
@@ -141,7 +140,21 @@ const CreatePost = ({ isAuth }) => {
           </div>
         </div>
         <Tags className="postTags" color="warning" setPostTags={setPostTags} />
-        <Button variant="contained" className="postButton" onClick={createPost}>
+        {/* TODO:無効化時のカラーをグレーに */}
+        <Button
+          variant="contained"
+          className="postButton"
+          onClick={createPost}
+          disabled={
+            !shopName ||
+            !isUploaded ||
+            !postText ||
+            !cost ||
+            !tasteValue ||
+            !moodValue ||
+            !overallValue
+          }
+        >
           Post
         </Button>
       </div>
