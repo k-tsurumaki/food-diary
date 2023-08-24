@@ -13,6 +13,8 @@ import {
   Input,
   InputAdornment,
   LinearProgress,
+  Menu,
+  MenuItem,
   Rating,
   TextField,
   Typography,
@@ -35,6 +37,7 @@ const Post = ({ isAuth }) => {
   const { postId } = useParams();
   const [selectedPost, setSelectedPost] = useState(null);
   const [isMyPost, setIsMyPost] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -60,14 +63,21 @@ const Post = ({ isAuth }) => {
     getPost();
   }, []);
 
+  const handleMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   const onDeletePost = () => {};
+  const onEditPost = () => {};
 
   if (!selectedPost) {
     // 非同期処理が完了するまでローディングバーを表示
     return <LinearProgress color="warning" />;
   }
-
-  // return <PostCard/>
 
   return (
     <div className="selectedPostPage">
@@ -80,9 +90,31 @@ const Post = ({ isAuth }) => {
             <Avatar src={selectedPost.userIcon} aria-label="recipe"></Avatar>
           }
           action={
-            <IconButton aria-label="settings">
-              <MoreVertIcon />
-            </IconButton>
+            isMyPost ? (
+              <>
+                <IconButton aria-label="settings">
+                  <MoreVertIcon onClick={handleMenu} />
+                </IconButton>
+                <Menu
+                  id="menu-appbar"
+                  anchorEl={anchorEl}
+                  anchorOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  open={Boolean(anchorEl)}
+                  onClose={handleClose}
+                >
+                  <MenuItem onClick={handleClose}>Edit</MenuItem>
+                  <MenuItem onClick={handleClose}>Delete</MenuItem>
+                </Menu>
+              </>
+            ) : null
           }
           title={selectedPost.userName}
           subheader={new Intl.DateTimeFormat("ja-JP", {
