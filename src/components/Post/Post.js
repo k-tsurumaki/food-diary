@@ -24,22 +24,25 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Stack from "@mui/material/Stack";
 import Tags from "../Tags/Tags";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import { auth, db } from "../../firebase";
 import "./Post.css";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import EditNoteIcon from "@mui/icons-material/EditNote";
 import DeleteIcon from "@mui/icons-material/Delete";
 import PostCard from "../PostCard/PostCard";
 import { ExpandMore } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
+
 
 const Post = ({ isAuth }) => {
   const { postId } = useParams();
   const [selectedPost, setSelectedPost] = useState(null);
   const [isMyPost, setIsMyPost] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
-  const navigate = useNavigate();
 
+  const navigate = useNavigate();
+  
   useEffect(() => {
     if (!isAuth) {
       navigate("/login");
@@ -71,7 +74,15 @@ const Post = ({ isAuth }) => {
     setAnchorEl(null);
   };
 
-  const onDeletePost = () => {};
+  const onDeletePost = async () => {
+    // deletedFlagをtrueにして論理削除
+    const docRef = doc(db, "posts", postId);
+    await updateDoc(docRef, { deletedFlag: true });
+
+    // timelineに遷移
+    navigate("/");
+  };
+
   const onEditPost = () => {};
 
   if (!selectedPost) {
@@ -90,6 +101,7 @@ const Post = ({ isAuth }) => {
             <Avatar src={selectedPost.userIcon} aria-label="recipe"></Avatar>
           }
           action={
+            // 自分の投稿なら三点リーダーを表示
             isMyPost ? (
               <>
                 <IconButton aria-label="settings">
@@ -111,7 +123,7 @@ const Post = ({ isAuth }) => {
                   onClose={handleClose}
                 >
                   <MenuItem onClick={handleClose}>Edit</MenuItem>
-                  <MenuItem onClick={handleClose}>Delete</MenuItem>
+                  <MenuItem onClick={() => onDeletePost()}>Delete</MenuItem>
                 </Menu>
               </>
             ) : null
