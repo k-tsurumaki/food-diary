@@ -5,7 +5,7 @@ import ImageListItem from "@mui/material/ImageListItem";
 import ImageListItemBar from "@mui/material/ImageListItemBar";
 import IconButton from "@mui/material/IconButton";
 import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";
-import { collection, getDocs, orderBy, query } from "firebase/firestore";
+import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
 import { db } from "../../firebase";
 import { Link } from "react-router-dom";
 import { Box, Rating, Typography } from "@mui/material";
@@ -24,11 +24,13 @@ export default function Timeline() {
 
   useEffect(() => {
     const getPosts = async () => {
-      const q = query(collection(db, "posts"), orderBy("timestamp", "desc"));
-      // const data = await getDocs(collection(db, "posts"));
-      // data.docs.map((doc) =>
-      //   doc.data().postTags.map((tag) => console.log(tag.category))
-      // );
+      const q = query(
+        collection(db, "posts"),
+        where("deletedFlag", "==", false),
+        orderBy("timestamp", "desc")
+      );
+      // const q = query(collection(db, "posts"), orderBy("timestamp", "desc"));
+
       const data = await getDocs(q);
       setPostList(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     };
@@ -89,7 +91,7 @@ export default function Timeline() {
                 <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
               }
             />
-            <Typography sx={{ ml: 2 }} >{labels[post.overall]}</Typography>
+            <Typography sx={{ ml: 2 }}>{labels[post.overall]}</Typography>
           </Box>
         </Link>
       ))}
